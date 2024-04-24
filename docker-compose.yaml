@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  sampleserver:
+    container_name: techyjauntsampleserver
+    build: .
+    ports:
+      - "7001:3000" # HOST_PORT:CONTAINER_PORT
+    command: "node main.js"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./store:/serverdir/src
+
+  mongodb:
+    container_name: sampleserverdb
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db
